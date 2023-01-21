@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty(trim($_POST["new_password"]))) {
         $new_password_err = "Enter new password.";
     } elseif (strlen(trim($_POST["new_password"])) < 6) {
-        $new_password_err = "Password must contain at least6 characters.";
+        $new_password_err = "Password must contain at least 6 characters.";
     } else {
         $new_password = trim($_POST["new_password"]);
     }
