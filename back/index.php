@@ -30,18 +30,3 @@ $gateway = new BeveragesGateway($database);
 $controller = new BeveragesController($gateway);
 
 $controller->processRequest($_SERVER["REQUEST_METHOD"], $id);
-
-
-?>
-
-
-
-
-
-
-
-
-
-
-
-

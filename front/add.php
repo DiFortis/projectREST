@@ -1,28 +1,9 @@
-<?php
-
-$options = [
-    "http" => [
-        "method" => "GET",
-        "header" => "Content-type: application/json; charset=UTF-8\r\n" .
-            "Accept-language: en",
-    ]
-];
-
-$context = stream_context_create($options);
-
-
-$data = file_get_contents("http://localhost/projectREST/back/api/beverages/", false, $context);
-
-$available = json_decode($data, true);
-extract($available);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>BrewAPI</title>
+    <title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -31,11 +12,10 @@ extract($available);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/stylesheetlogowania.css" rel="stylesheet">
 </head>
 
 <body>
-
     <header class="p-3 text-bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -81,31 +61,29 @@ extract($available);
             </div>
         </div>
     </header>
-    <div class="container">
-        <h2>All beverages</h2>
-        <div class="product-list">
+    <div class="wrapper" style="display: inline-block">
+        <img src="img/brewapi.png" id="olbrew-login"></img>
+        <h2>Add new beverage</h2>
+        <p>Fill in all fields to add a new record</p>
+        <form action="">
+            <div class="form-group">
 
-            <table width="90%" class="table table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Beverage name</th>
-                    <th>Ingredients</th>
-                    <th>Available?</th>
-                </tr>
-                <?php for ($i = 0; $i < count($available); $i++) { ?>
-                    <tr>
-                        <td><?php echo ($available[$i]['id']); ?></td>
-                        <td><?php echo ($available[$i]['name']); ?></td>
-                        <td><?php echo ($available[$i]['ingredients']); ?></td>
-                        <td><?php echo ($available[$i]['is_available'] ? 'Available' : 'Not available'); ?></td>
-                    </tr>
-                <?php } ?>
-            </table>
-        </div>
+                <input type="text" name="name" class="form-control" value="" placeholder="Name" required onfocus="this.placeholder=''" onblur="this.placeholder='Name'">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" name="ingredients" class="form-control" placeholder="Ingredients" required onfocus="this.placeholder=''" onblur="this.placeholder='Ingredients'">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <input type="bool" name="is_available" class="form-control" value="" placeholder="Available?(0 or 1)" required onfocus="this.placeholder=''" onblur="this.placeholder='Available?(0 or 1)'">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Add beverage">
+            </div>
+        </form>
     </div>
-
-
-
 </body>
 
 </html>
