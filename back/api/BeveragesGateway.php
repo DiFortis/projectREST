@@ -73,7 +73,6 @@ class BeveragesGateway
 
     public function update(array $current, array $new): int
     {
-        session_start();
 
         // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -99,7 +98,6 @@ class BeveragesGateway
 
     public function delete(string $id): int
     {
-        session_start();
 
         // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
