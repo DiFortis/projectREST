@@ -29,6 +29,13 @@ class BeveragesGateway
 
     public function create(array $data): string
     {
+        session_start();
+
+        // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            header("location: front/login.php");
+            exit;
+        }
         $sql = "INSERT INTO beverages (name, ingredients, is_available)
                 VALUES (:name, :ingredients, :is_available)";
 
@@ -66,6 +73,13 @@ class BeveragesGateway
 
     public function update(array $current, array $new): int
     {
+        session_start();
+
+        // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            header("location: front/login.php");
+            exit;
+        }
         $sql = "UPDATE beverages
                 SET name = :name, ingredients = :ingredients, is_available = :is_available
                 WHERE id = :id";
@@ -85,6 +99,13 @@ class BeveragesGateway
 
     public function delete(string $id): int
     {
+        session_start();
+
+        // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            header("location: front/login.php");
+            exit;
+        }
         $sql = "DELETE FROM beverages
                 WHERE id = :id";
 

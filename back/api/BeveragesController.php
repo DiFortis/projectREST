@@ -33,6 +33,13 @@ class BeveragesController
                 break;
 
             case "PATCH":
+                session_start();
+
+                // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
+                if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+                    header("location: front/login.php");
+                    exit;
+                }
                 $data = (array) json_decode(file_get_contents("php://input"), true);
 
                 $errors = $this->getValidationErrors($data, false);
@@ -52,6 +59,13 @@ class BeveragesController
                 break;
 
             case "DELETE":
+                session_start();
+
+                // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
+                if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+                    header("location: front/login.php");
+                    exit;
+                }
                 $rows = $this->gateway->delete($id);
 
                 echo json_encode([
@@ -74,6 +88,13 @@ class BeveragesController
                 break;
 
             case "POST":
+                session_start();
+
+                // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
+                if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+                    header("location: front/login.php");
+                    exit;
+                }
                 $data = (array) json_decode(file_get_contents("php://input"), true);
 
                 $errors = $this->getValidationErrors($data);

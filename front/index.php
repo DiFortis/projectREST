@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $options = [
     "http" => [
@@ -60,7 +61,7 @@ extract($available);
                         </li>
                     </ul>
                 </ul>
-
+                <?php if (isset($_SESSION['username'])) : ?>
                 <div class="text-end">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
@@ -68,7 +69,7 @@ extract($available);
                                 <i class="fa-solid fa-user fa-xl"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="account.php" style="text-decoration: none"><span class="glyphicon glyphicon-user"></span> <b class="b-user">Profil: <?php echo htmlspecialchars($_SESSION["username"]); ?></b></a></li>
+                                <li><a class="dropdown-item" style="text-decoration: none"><span class="glyphicon glyphicon-user"></span> <b class="b-user">Profil: <?php echo htmlspecialchars($_SESSION["username"]); ?></b></a></li>
                                 <li><a class="dropdown-item" href="pass_reset.php" style="text-decoration: none" id="a-log-out"><span class="glyphicon glyphicon-log-out"></span> Reset password</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -78,6 +79,14 @@ extract($available);
                         </li>
                     </ul>
                 </div>
+                <?php endif ?>
+                <?php if (!isset($_SESSION['username'])) : ?>
+                    <div class="text-end">
+                    <ul class="navbar-nav">
+                    <li><a class="nav-link px-2 text-white" href="login.php" >Log In.</a></li>
+                    </ul>
+                    </div>
+                    <?php endif ?>
             </div>
         </div>
     </header>
