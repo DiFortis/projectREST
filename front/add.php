@@ -7,6 +7,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   header("location: login.php");
   exit;
 }
+$options = [
+    "http" => [
+        "method" => "POST",
+        "header" => "Content-type: application/json; charset=UTF-8\r\n" .
+            "Accept-language: en",
+    ]
+];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,21 +85,26 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <form action="">
             <div class="form-group">
 
-                <input type="text" name="name" class="form-control" value="" placeholder="Name" required onfocus="this.placeholder=''" onblur="this.placeholder='Name'">
+                <input type="text" name="beverages[0][name]" class="form-control" value="" placeholder="Name" required onfocus="this.placeholder=''" onblur="this.placeholder='Name'">
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
-                <input type="text" name="ingredients" class="form-control" placeholder="Ingredients" required onfocus="this.placeholder=''" onblur="this.placeholder='Ingredients'">
+                <input type="text" name="beverages[0][ingredients]" class="form-control" placeholder="Ingredients" required onfocus="this.placeholder=''" onblur="this.placeholder='Ingredients'">
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
-                <input type="bool" name="is_available" class="form-control" value="" placeholder="Available?(0 or 1)" required onfocus="this.placeholder=''" onblur="this.placeholder='Available?(0 or 1)'">
+                <input type="bool" name="beverages[0][is_available]" class="form-control" value="" placeholder="Available?(0 or 1)" required onfocus="this.placeholder=''" onblur="this.placeholder='Available?(0 or 1)'">
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Add beverage">
+                <input type="submit" class="btn btn-primary" value="Add beverage" method="POST">
             </div>
         </form>
+        <?php
+        $context = stream_context_create($options);
+        $available = json_encode(var_dump($_POST['beverages']), true);
+
+        ?>
     </div>
 </body>
 

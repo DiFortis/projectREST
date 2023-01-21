@@ -28,7 +28,7 @@ class BeveragesGateway
     }
 
     public function create(array $data): string
-    {
+    {   if(session_status()!==PHP_SESSION_ACTIVE)
         session_start();
 
         // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
@@ -73,7 +73,8 @@ class BeveragesGateway
 
     public function update(array $current, array $new): int
     {
-
+        if(session_status()!==PHP_SESSION_ACTIVE)
+        session_start();
         // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             header("location: front/login.php");
@@ -98,7 +99,8 @@ class BeveragesGateway
 
     public function delete(string $id): int
     {
-
+        if(session_status()!==PHP_SESSION_ACTIVE)
+        session_start();
         // Sprawdzenie czy użytkownik jest zalogowany, jeśli nie to następuje przeniesienie go do strony logowania
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             header("location: front/login.php");
